@@ -9,6 +9,7 @@ const disableClose = () => {
 
 const showMessage = () => {
     if (clickCount < maxClicks) {
+        // Crear el mensaje en una posición aleatoria
         const randomX = Math.random() * window.innerWidth;
         const randomY = Math.random() * window.innerHeight;
 
@@ -24,18 +25,18 @@ const showMessage = () => {
         messageElement.style.borderRadius = "5px";
         document.body.appendChild(messageElement);
 
-        // Crear el diálogo de alerta
+        // Crear la alerta con confirmación
         const userResponse = confirm("Aún no puedes salir. ¿Aceptar para repetir o Cancelar para salir?");
         if (userResponse) {
             // Si acepta, se repite el mensaje en otro lugar
             showMessage();
         } else {
-            // Si cancela, se muestra otro mensaje de alerta
+            // Si cancela, muestra el mensaje de alerta
             alert("No, aún no puedes salir de la página.");
-            clickCount++; // Incrementa el contador
+            clickCount++; // Incrementa el contador de clics
         }
 
-        // Mantener el contador actualizado
+        // Actualizar el contador de clics
         document.getElementById('count').textContent = `Intentos restantes: ${maxClicks - clickCount}`;
     } else {
         alert("¡Lo lograste! Ahora puedes salir.");
@@ -43,6 +44,7 @@ const showMessage = () => {
     }
 };
 
+// Llamar a la función cuando la página esté completamente cargada
 document.addEventListener('DOMContentLoaded', function() {
     disableClose();
     showMessage();
