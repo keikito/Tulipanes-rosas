@@ -34,22 +34,38 @@ const showMessage = () => {
             clickCount++; // Incrementa el contador
             showMessage(); // Repite el mensaje
         } else {
-            // Si cancela, muestra el mensaje en una nueva posición
+            // Si cancela, muestra el mensaje en una nueva posición repetidamente
             alert("No, aún no puedes salir de la página.");
             clickCount++; // Incrementa el contador
-            showMessage(); // Vuelve a mostrar el mensaje en otra ubicación
+
+            // Mostrar el mensaje 600 veces con un intervalo de 1 segundo
+            let repeatCount = 0;
+            const interval = setInterval(() => {
+                const randomX = Math.random() * window.innerWidth;
+                const randomY = Math.random() * window.innerHeight;
+
+                const messageElement = document.createElement("div");
+                messageElement.innerHTML = "¡Aún no puedes salir!";
+                messageElement.style.position = "absolute";
+                messageElement.style.left = `${randomX}px`;
+                messageElement.style.top = `${randomY}px`;
+                messageElement.style.fontSize = "24px";
+                messageElement.style.color = "white";
+                messageElement.style.backgroundColor = "red";
+                messageElement.style.padding = "10px";
+                messageElement.style.borderRadius = "5px";
+                document.body.appendChild(messageElement);
+
+                repeatCount++;
+
+                if (repeatCount >= 600) {
+                    clearInterval(interval); // Detener la repetición después de 600 veces
+                }
+            }, 1000); // 1000 ms = 1 segundo
+
         }
 
         // Actualizar el contador de clics
         document.getElementById('count').textContent = `Intentos restantes: ${maxClicks - clickCount}`;
     } else {
-        alert("¡Lo lograste! Ahora puedes salir.");
-        window.close(); // Permite cerrar la página
-    }
-};
-
-// Llamar a la función cuando la página esté completamente cargada
-document.addEventListener('DOMContentLoaded', function() {
-    disableClose(); // Deshabilitar el botón de cierre de la ventana
-    showMessage(); // Muestra el mensaje al cargar la página
-});
+        alert("¡Lo logra
