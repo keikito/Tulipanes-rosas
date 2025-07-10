@@ -4,6 +4,7 @@ const totalRepetitions = 600;  // Número de repeticiones
 let repeatCount = 0; // Contador de repeticiones
 
 const disableClose = () => {
+    // Prevenir que el usuario cierre la página (haciendo clic en la X de la ventana)
     window.onbeforeunload = function() {
         return "¡Aún no puedes cerrar la página!";
     };
