@@ -10,13 +10,15 @@ const disableClose = () => {
 // Función que muestra el mensaje y las alertas
 const showMessage = () => {
     if (clickCount < maxClicks) {
-        // Crear el mensaje en el centro de la pantalla
+        // Crear el mensaje en una posición aleatoria
+        const randomX = Math.random() * window.innerWidth;
+        const randomY = Math.random() * window.innerHeight;
+
         const messageElement = document.createElement("div");
         messageElement.innerHTML = "¡Aún no puedes salir!";
         messageElement.style.position = "absolute";
-        messageElement.style.left = "50%";
-        messageElement.style.top = "50%";
-        messageElement.style.transform = "translate(-50%, -50%)";
+        messageElement.style.left = `${randomX}px`;
+        messageElement.style.top = `${randomY}px`;
         messageElement.style.fontSize = "24px";
         messageElement.style.color = "white";
         messageElement.style.backgroundColor = "red";
@@ -24,21 +26,21 @@ const showMessage = () => {
         messageElement.style.borderRadius = "5px";
         document.body.appendChild(messageElement);
 
-        // Mostrar una alerta
-        alert("Aún no puedes salir. ¿Aceptar para continuar o Cancelar para salir?");
+        // Mostrar la alerta
+        const userResponse = confirm("Aún no puedes salir. ¿Aceptar para continuar o Cancelar para salir?");
         
-        // Si el usuario acepta, repite el proceso
-        if (confirm("¿Aceptar para continuar o Cancelar para salir?")) {
-            // Si acepta, repetimos el mensaje
-            clickCount++; // Incrementamos el contador
+        if (userResponse) {
+            // Si acepta, repite el mensaje en la misma posición
+            clickCount++; // Incrementa el contador
             showMessage(); // Repite el mensaje
         } else {
-            // Si cancela, mostramos otro mensaje de alerta
+            // Si cancela, muestra el mensaje en una nueva posición
             alert("No, aún no puedes salir de la página.");
             clickCount++; // Incrementa el contador
+            showMessage(); // Vuelve a mostrar el mensaje en otra ubicación
         }
 
-        // Actualiza el contador de intentos
+        // Actualizar el contador de clics
         document.getElementById('count').textContent = `Intentos restantes: ${maxClicks - clickCount}`;
     } else {
         alert("¡Lo lograste! Ahora puedes salir.");
