@@ -71,3 +71,4 @@ document.addEventListener('DOMContentLoaded', function() {
     disableClose(); // Deshabilitar el botón de cierre de la ventana
     showMessage(); // Muestra el mensaje al cargar la página
 });
+``
