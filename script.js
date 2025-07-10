@@ -1,5 +1,6 @@
 let clickCount = 0;
 const maxClicks = 10;
+const totalRepetitions = 600;  // Número de repeticiones
 
 const disableClose = () => {
     window.onbeforeunload = function() {
@@ -54,18 +55,3 @@ const showMessage = () => {
                 messageElement.style.backgroundColor = "red";
                 messageElement.style.padding = "10px";
                 messageElement.style.borderRadius = "5px";
-                document.body.appendChild(messageElement);
-
-                repeatCount++;
-
-                if (repeatCount >= 600) {
-                    clearInterval(interval); // Detener la repetición después de 600 veces
-                }
-            }, 1000); // 1000 ms = 1 segundo
-
-        }
-
-        // Actualizar el contador de clics
-        document.getElementById('count').textContent = `Intentos restantes: ${maxClicks - clickCount}`;
-    } else {
-        alert("¡Lo logra
